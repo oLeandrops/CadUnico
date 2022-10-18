@@ -13,11 +13,7 @@ db_session  = scoped_session(sessionmaker(autocommit=False,
 base = declarative_base()
 base.query = db_session.query_property()
 
-
-
 #criacao da tabela
-
-
 
 class Pessoas(base):
     __tablename__ = 'pessoas'

@@ -8,7 +8,7 @@ from time import sleep
 #browser.get(url)
 
 def consultar(browser,cpf,dtnasc):
-    browser.implicitly_wait(1)
+    browser.implicitly_wait(0.5)
     browser.find_element(By.CSS_SELECTOR,'[id="numeroCpfPessoa"]').send_keys(Keys.BACKSPACE*11)
     browser.find_element(By.CSS_SELECTOR,'#mui-1').send_keys(Keys.BACKSPACE*9)
     browser.find_element(By.CSS_SELECTOR,'[id="numeroCpfPessoa"]').send_keys(cpf)
@@ -17,6 +17,9 @@ def consultar(browser,cpf,dtnasc):
         carregando = len(browser.find_elements(By.CSS_SELECTOR,'#mui-1'))
     browser.find_element(By.CSS_SELECTOR,'#mui-1').send_keys(dtnasc)
     browser.find_element(By.CSS_SELECTOR,'[class="br-button ConsultaCpf_botaoGovBr__1Vp3a"]').click()
+    carregando1 = len(browser.find_elements(By.CSS_SELECTOR,'div[class*="LoadingGlobal"'))
+    while carregando1 > 0:
+        carregando1 = len(browser.find_elements(By.CSS_SELECTOR,'div[class*="LoadingGlobal"'))
     if len(browser.find_elements(By.CSS_SELECTOR,'span[class="Message_title__LINZ4"]')) > 0:
         mensagem = browser.find_element(By.CSS_SELECTOR,'span[class="Message_title__LINZ4"]').text
     else:

@@ -16,9 +16,9 @@ def select(status):
     status = pessoas.status
     return cpf, data
 
-def update(cpf,status):
-    pessoas = Pessoas.query.filter(Pessoas.cpf==cpf).first()
-    pessoas.status = status
+def update(cpf,statusNovo):
+    pessoas = Pessoas.query.filter(Pessoas.cpf==cpf,Pessoas.status == None).first()
+    pessoas.status = statusNovo
     db_session.add(pessoas)
     db_session.commit()
     print('Pessoa atualizada...')
@@ -35,10 +35,17 @@ def delete(condicao):
     Pessoas.save()
     print('Deletado com sucedsso')
 
+def contagem(job,status):
+    pessoas = Pessoas.query.filter(Pessoas.job==job,Pessoas.status==status)
+    count = pessoas.count()
+    print(count)
+
 
 if __name__ == '__main__':
     #insert(cpf='46774533817',dtnasc='19031999',status=None)
     #print(select(None))
-    select_all()
+    #select_all()
     #delete('DT_NASC')
     #update('46774533817','Esse CPF não foi encontrado na base do Cadastro Único.')
+    #print(select(None))
+    contagem('JOB71757',None)
